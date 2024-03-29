@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4kot2bwv8k72"]
+
+[ext_resource type="Script" path="res://src/scenes/actors/player.gd" id="1_hl16e"]
+[ext_resource type="PackedScene" uid="uid://cf8fbkqri0v7t" path="res://src/scenes/components/gravity_component.tscn" id="2_3e6kl"]
+[ext_resource type="PackedScene" uid="uid://uwi0k6r06xc1" path="res://src/scenes/components/angle_component.tscn" id="3_tyvvd"]
+[ext_resource type="PackedScene" uid="uid://cp1bht1f4s42s" path="res://src/scenes/components/movement_component.tscn" id="4_h7weh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ardc2"]
+size = Vector2(136, 270)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 29
+wall_min_slide_angle = 0.0
+floor_constant_speed = true
+floor_block_on_wall = false
+floor_max_angle = 3.14159
+floor_snap_length = 20.0
+script = ExtResource("1_hl16e")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -68.0
+offset_top = -136.0
+offset_right = 68.0
+offset_bottom = 134.0
+pivot_offset = Vector2(68, 135)
+color = Color(1, 0.662745, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ardc2")
+
+[node name="AngleComponent" parent="." instance=ExtResource("3_tyvvd")]
+
+[node name="MovementComponent" parent="." node_paths=PackedStringArray("angle_component") instance=ExtResource("4_h7weh")]
+angle_component = NodePath("../AngleComponent")
+acceleration = 3000.0
+traction = 3000.0
+
+[node name="GravityComponent" parent="." instance=ExtResource("2_3e6kl")]
+jump_gravity = 4500
+fall_gravity = 2000
+
+[connection signal="mode" from="AngleComponent" to="." method="_on_angle_component_mode"]

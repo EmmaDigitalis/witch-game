@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://b757xr65fw2or"]
+
+[ext_resource type="Script" path="res://src/scenes/rooms/test_level.gd" id="1_xkxy5"]
+[ext_resource type="PackedScene" uid="uid://b6r53febvaf0t" path="res://src/scenes/actors/simple_player.tscn" id="2_nqjun"]
+
+[node name="TestLevel" type="Node2D"]
+script = ExtResource("1_xkxy5")
+
+[node name="Collision" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision"]
+position = Vector2(675, 270)
+polygon = PackedVector2Array(1890, 270, 1620, 270, 1350, 405, 1215, 540, 1080, 810, 1080, 1080, 945, 1080, 945, 135, 2700, 135, 2700, 1890, 945, 1890, -7425, 1890, -7425, -270, -7155, -270, -7155, 1485, -4185, 1485, -3645, 1620, -1350, 1620, -1350, 1350, -810, 1350, -810, 1080, -270, 1080, -270, 810, 405, 810, 405, 1080, 540, 1350, 675, 1485, 945, 1620, 1350, 1620, 1890, 1620, 2160, 1485, 2295, 1350, 2430, 1080, 2430, 810, 2295, 540, 2160, 405)
+
+[node name="Polygon2D" type="Polygon2D" parent="Collision"]
+position = Vector2(675, 270)
+
+[node name="Actors" type="Node2D" parent="."]
+
+[node name="SimplePlayer" parent="Actors" instance=ExtResource("2_nqjun")]
+position = Vector2(2295, 1215)
+
+[node name="Camera2D" type="Camera2D" parent="Actors/SimplePlayer"]

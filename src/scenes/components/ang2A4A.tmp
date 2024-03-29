@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://uwi0k6r06xc1"]
+
+[ext_resource type="Script" path="res://src/scenes/components/angle_detection_component.gd" id="1_g4px2"]
+
+[node name="AngleDetectionComponent" type="Node2D"]
+script = ExtResource("1_g4px2")
+
+[node name="RayBottomRight" type="RayCast2D" parent="."]
+position = Vector2(68, 0)
+target_position = Vector2(0, 150)
+
+[node name="RayBottomLeft" type="RayCast2D" parent="."]
+position = Vector2(-68, 0)
+target_position = Vector2(0, 150)

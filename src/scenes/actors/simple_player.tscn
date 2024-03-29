@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6r53febvaf0t"]
+
+[ext_resource type="Script" path="res://src/scenes/actors/simple_player.gd" id="1_b8m4r"]
+[ext_resource type="PackedScene" uid="uid://dmkk23k8t3f5w" path="res://src/scenes/components/hurtbox_component.tscn" id="2_eri0e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8dak5"]
+size = Vector2(134, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5skpn"]
+size = Vector2(128, 224)
+
+[node name="SimplePlayer" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 29
+slide_on_ceiling = false
+wall_min_slide_angle = 0.0
+floor_constant_speed = true
+floor_max_angle = 1.48353
+floor_snap_length = 100.0
+script = ExtResource("1_b8m4r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8dak5")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_left = -68.0
+offset_top = -136.0
+offset_right = 68.0
+offset_bottom = 134.0
+pivot_offset = Vector2(68, 135)
+color = Color(0.980392, 0.321569, 0.780392, 1)
+
+[node name="RayDownLeft" type="RayCast2D" parent="."]
+
+[node name="RayDownRight" type="RayCast2D" parent="."]
+
+[node name="RayUpLeft" type="RayCast2D" parent="."]
+target_position = Vector2(0, -50)
+
+[node name="RayUpRight" type="RayCast2D" parent="."]
+target_position = Vector2(0, -50)
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("2_eri0e")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_5skpn")
+
+[node name="ControlLock" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = 96.0
+offset_top = -160.0
+offset_right = 152.0
+offset_bottom = -121.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 34
+text = "asdasd"
+
+[connection signal="timeout" from="ControlLock" to="." method="_on_control_lock_timeout"]

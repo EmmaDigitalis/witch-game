@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://uwi0k6r06xc1"]
+
+[ext_resource type="Script" path="res://src/scenes/components/angle_component.gd" id="1_fcdsr"]
+
+[node name="AngleComponent" type="Node2D" node_paths=PackedStringArray("detection_method")]
+position = Vector2(0, 1)
+script = ExtResource("1_fcdsr")
+detection_method = NodePath("")
+
+[node name="RayRight" type="RayCast2D" parent="."]
+position = Vector2(68, 0)
+target_position = Vector2(0, 150)
+
+[node name="RayLeft" type="RayCast2D" parent="."]
+position = Vector2(-68, 0)
+target_position = Vector2(0, 150)
